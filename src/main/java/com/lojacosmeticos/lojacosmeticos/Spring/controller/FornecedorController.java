@@ -1,30 +1,34 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.controller;
 
+import com.lojacosmeticos.lojacosmeticos.Spring.model.Fornecedor;
 import com.lojacosmeticos.lojacosmeticos.Spring.model.Funcionario;
+import com.lojacosmeticos.lojacosmeticos.Spring.repository.FornecedorRepository;
 import com.lojacosmeticos.lojacosmeticos.Spring.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/estoque")
+@RequestMapping("/fornecedor")
 public class FornecedorController {
     @Autowired
-    private FuncionarioRepository funcionarioRepository;
+    private FornecedorRepository forneedorRepository;
 
     @GetMapping
-    public List<Funcionario> listarFuncionarios() {
-        return funcionarioRepository.findAll();
+    public List<Fornecedor> listarFuncionarios() {
+        return forneedorRepository.findAll();
     }
 
     @PostMapping
-    public Funcionario criarFuncionario(@RequestBody Funcionario funcionario) {
-        return funcionarioRepository.save(funcionario);
+    public Fornecedor criarFornecedor(@RequestBody Fornecedor fornecedor) {
+        return forneedorRepository.save(fornecedor);
+    }
+    @GetMapping("/deletar/{id}")
+    public String deletarFornecedor(@PathVariable Long id) {
+        forneedorRepository.deleteById(id);
+        return "redirect:/fornecedor/lista-fornecedores";
     }
 
 

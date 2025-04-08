@@ -1,8 +1,16 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
-import java.util.Date;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+import java.util.Date;
+@Entity
 public class Cadastro {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected  Long id;
 
     protected String nome;
     protected String cpf;
