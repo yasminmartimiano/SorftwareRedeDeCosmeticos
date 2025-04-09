@@ -1,35 +1,50 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.controller;
 
 import com.lojacosmeticos.lojacosmeticos.Spring.model.Fornecedor;
-import com.lojacosmeticos.lojacosmeticos.Spring.model.Funcionario;
 import com.lojacosmeticos.lojacosmeticos.Spring.repository.FornecedorRepository;
-import com.lojacosmeticos.lojacosmeticos.Spring.repository.FuncionarioRepository;
+import com.lojacosmeticos.lojacosmeticos.Spring.service.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @Controller
 @RequestMapping("/fornecedor")
 public class FornecedorController {
     @Autowired
-    private FornecedorRepository forneedorRepository;
+    private FornecedorRepository fornecedorRepository;
+
+    private FornecedorService fornecedorService;
+
+    public FornecedorController(FornecedorService fornecedorService){
+        this.fornecedorService = fornecedorService;
+    }
 
     @GetMapping
-    public List<Fornecedor> listarFuncionarios() {
-        return forneedorRepository.findAll();
+    public ResponseEntity<List<Fornecedor> >listarFuncionarios() {
+        return ResponseEntity.status(200).body(fornecedorService.listarFornecedor());
     }
 
     @PostMapping
-    public Fornecedor criarFornecedor(@RequestBody Fornecedor fornecedor) {
-        return forneedorRepository.save(fornecedor);
+    public ResponseEntity<Fornecedor> criarFornecedor(@RequestBody Fornecedor fornecedor) {
+        return ResponseEntity.status(201).body(fornecedorService.cadastrarFornecedor(fornecedor));
+
     }
-    @GetMapping("/deletar/{id}")
-    public String deletarFornecedor(@PathVariable Long id) {
-        forneedorRepository.deleteById(id);
-        return "redirect:/fornecedor/lista-fornecedores";
+
+    @PutMapping
+    public ResponseEntity<Fornecedor> editarFornecedor(@RequestBody Fornecedor fornecedor){
+        return ResponseEntity.status(200).body(fornecedorService.editarFornecedor(fornecedor));
+
     }
+   @DeleteMapping("/{id}")
+    public ResponseEntity<?> excluirFornecedor (@PathVariable Long id){
+       fornecedorService.excluirFornecedor(id);
+        return ResponseEntity.status(204).build();
+   }
+
+
+
 
 
 }

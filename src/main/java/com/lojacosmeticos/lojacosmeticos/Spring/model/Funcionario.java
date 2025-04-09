@@ -18,6 +18,7 @@ public class Funcionario {
     private String telefone;
 
 
+
     public Funcionario() {
     }
 
@@ -26,6 +27,14 @@ public class Funcionario {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Cargos getCargo() {

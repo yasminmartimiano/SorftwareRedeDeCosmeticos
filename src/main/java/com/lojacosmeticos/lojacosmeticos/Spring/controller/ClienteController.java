@@ -25,6 +25,7 @@ public class ClienteController {
     public Cliente criarCliente(@RequestBody Cliente cliente) {
         return clienteRepository.save(cliente);
     }
+
     @GetMapping("/deletar/{id}")
     public String deletarCliente(@PathVariable Long id) {
         clienteRepository.deleteById(id);
@@ -34,6 +35,6 @@ public class ClienteController {
     @GetMapping("/lista-clientes")
     public String mostrarClientes(Model model) {
         model.addAttribute("clientes", clienteRepository.findAll());
-        return "clientes"; // nome do arquivo HTML (clientes.html)
+        return "clientes";
     }
 }

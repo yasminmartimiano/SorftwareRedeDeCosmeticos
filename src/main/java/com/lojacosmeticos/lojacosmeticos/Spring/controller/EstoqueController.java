@@ -2,6 +2,7 @@ package com.lojacosmeticos.lojacosmeticos.Spring.controller;
 
 import com.lojacosmeticos.lojacosmeticos.Spring.model.Estoque;
 import com.lojacosmeticos.lojacosmeticos.Spring.repository.EstoqueRepository;
+import com.lojacosmeticos.lojacosmeticos.Spring.service.EstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,13 @@ public class EstoqueController {
 
     @Autowired
     private EstoqueRepository estoqueRepository;
+
+    private EstoqueService estoqueService;
+
+    public EstoqueController(EstoqueService estoqueService){
+        this.estoqueService = estoqueService;
+    }
+
 
     @GetMapping
     public List<Estoque> listarEstoque() {
