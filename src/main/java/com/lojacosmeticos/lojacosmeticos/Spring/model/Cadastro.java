@@ -11,7 +11,6 @@ public class Cadastro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected  Long id;
-
     protected String nome;
     protected String cpf;
     protected String email;

@@ -10,8 +10,11 @@ public class Cliente {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
 
+        @Column(name = "nome_cliente")
         private String nomeCliente;
+        @Column(name = "itens")
         private String itens;
+        @Column(name = "total")
         private Double total;
 
         public Cliente() {
