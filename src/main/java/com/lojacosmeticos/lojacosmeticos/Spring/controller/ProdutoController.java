@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/produtos")
+@RequestMapping("/produto")
 public class ProdutoController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class ProdutoController {
     @GetMapping("/deletar/{id}")
     public String deletarProduto(@PathVariable Long id) {
        produtoRepository.deleteById(id);
-        return "redirect:/produtos/lista-produtos";
+        return "redirect:/produto/lista-produtos";
     }
 
 }

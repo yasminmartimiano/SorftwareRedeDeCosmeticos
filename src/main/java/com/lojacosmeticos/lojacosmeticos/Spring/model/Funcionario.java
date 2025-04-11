@@ -1,40 +1,34 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
-public class Funcionario {
-
-
+public class Funcionario extends Cadastro{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private  Long id;
+    @Column(name = "")
+    private Double salario;
+    @Column(name = "")
     private Cargos cargo;
-    private String nome;
-    private String email;
-    private String telefone;
+
+    @OneToMany(mappedBy = "idFuncionario", cascade = CascadeType.ALL)
+    List<SaidaEstoque> saidaEstoque;
+    @OneToMany(mappedBy = "idFuncionario", cascade = CascadeType.ALL)
+    List<Vendas> vendas;
 
 
-
-    public Funcionario() {
-    }
-
-    public Funcionario(Cargos cargo, String nome, String email, String telefone) {
-        this.cargo = cargo;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public Funcionario(String nome, String cpf, String email, String senha, String telefone, Long id, Double salario, Cargos cargo) {
+        super(nome, cpf, email, senha, telefone);
         this.id = id;
+        this.salario = salario;
+        this.cargo = cargo;
+    }
+
+    public Funcionario(String nome, String cpf, String email, String senha, String telefone) {
+        super(nome, cpf, email, senha, telefone);
     }
 
     public Cargos getCargo() {
@@ -45,27 +39,20 @@ public class Funcionario {
         this.cargo = cargo;
     }
 
-    public String getNome() {
-        return nome;
+    public Long getId() {
+        return id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public Double getSalario() {
+        return salario;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setSalario(Double salario) {
+        this.salario = salario;
     }
 
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
 }

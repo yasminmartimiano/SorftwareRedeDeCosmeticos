@@ -1,9 +1,8 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Produto {
@@ -11,21 +10,38 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
+    @Column(name = "")
     private String nomeProduto;
+    @Column(name = "")
     private String descriacao;
+    @Column(name = "")
     private CategoriaProdutos categoriaProdutos;
-    private double preco_produto;
+    @Column(name = "")
+    private int quantidadeEstoque;
+    @Column(name = "")
+    private double precoProduto;
+
+    @OneToMany(mappedBy = "idProduto", cascade = CascadeType.ALL)
+    List<EntradaEstoque> entradaEstoque;
+
+    @OneToMany(mappedBy = "idProduto",cascade = CascadeType.ALL)
+    List<SaidaEstoque> saidaEstoque;
+
 
 
     public Produto() {
     }
 
 
-    public Produto(String nomeProduto, String descriacao, CategoriaProdutos categoriaProdutos, double preco_produto) {
+    public Produto(Long id, String nomeProduto, String descriacao, CategoriaProdutos categoriaProdutos, int quantidadeEstoque, double precoProduto, List<EntradaEstoque> entradaEstoque, List<SaidaEstoque> saidaEstoque) {
+        this.id = id;
         this.nomeProduto = nomeProduto;
         this.descriacao = descriacao;
         this.categoriaProdutos = categoriaProdutos;
-        this.preco_produto = preco_produto;
+        this.quantidadeEstoque = quantidadeEstoque;
+        this.precoProduto = precoProduto;
+        this.entradaEstoque = entradaEstoque;
+        this.saidaEstoque = saidaEstoque;
     }
 
     public String getNomeProduto() {
@@ -52,12 +68,43 @@ public class Produto {
         this.categoriaProdutos = categoriaProdutos;
     }
 
-    public double getPreco_produto() {
-        return preco_produto;
+    public double getPrecoProduto() {
+        return precoProduto;
     }
 
-    public void setPreco_produto(double preco_produto) {
-        this.preco_produto = preco_produto;
+    public void setPrecoProduto(double precoProduto) {
+        this.precoProduto = precoProduto;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getQuantidadeEstoque() {
+        return quantidadeEstoque;
+    }
+
+    public void setQuantidadeEstoque(int quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
+    }
+
+    public List<EntradaEstoque> getEntradaEstoque() {
+        return entradaEstoque;
+    }
+
+    public void setEntradaEstoque(List<EntradaEstoque> entradaEstoque) {
+        this.entradaEstoque = entradaEstoque;
+    }
+
+    public List<SaidaEstoque> getSaidaEstoque() {
+        return saidaEstoque;
+    }
+
+    public void setSaidaEstoque(List<SaidaEstoque> saidaEstoque) {
+        this.saidaEstoque = saidaEstoque;
+    }
 }

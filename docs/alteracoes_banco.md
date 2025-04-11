@@ -41,8 +41,14 @@ Este documento tem como finalidade registrar todas as modificações realizadas 
 
 
 - Relações principais:
-    - Cada `usuario` pode ter várias `transacoes`
-    - Cada `transacao` pertence a uma `categoria`
+    - Cada `cliente` pode ter várias `compras`
+    - Cada `compra` pertence a um `cliente`
+    - Cada `produto` pertence a um `fornecedor`
+    - Cada `fornecedor` pode ter vários `produtos`
+    - Cada `venda` pertence a um `funcionario`
+    - Cada `funcionario` pode realizar várias `vendas`
+    - Cada `agendamento` pertence a um `cliente`
+    - Cada `cliente` pode ter vários `agendamentos`
 
 ---
 
@@ -50,14 +56,21 @@ Este documento tem como finalidade registrar todas as modificações realizadas 
 
 ### 3.1. Renomeação de Tabelas
 
-- `usuarios` → `clientes`  
-  *Motivo:* O termo "cliente" reflete melhor o novo domínio da aplicação.
+- `Produtos` → `produtos`, 
+- `Fornecedores` → `fornecedores`,
+- `Entrada` → `entrada`, 
+- `Saida` → `saida`,
+- `Funcionarios` → `funcionarios`,
+- `Servicos` → `servicos`,
+- `Agendamentos` → `agendamentos` 
+- `Vendas` → `vendas`
+  *Motivo:* Mudança efetuada para o nome da tabela seguir o padrão "snake case".
 
 ---
 
 ### 3.2. Novas Tabelas Criadas
 
-- `cartoes_credito`  
+- `estoque`  
   Campos: `id`, `numero_cartao`, `bandeira`, `limite`, `cliente_id`  
   *Motivo:* Gerenciar os cartões de crédito dos clientes vinculados ao sistema.
 
@@ -65,16 +78,31 @@ Este documento tem como finalidade registrar todas as modificações realizadas 
 
 ### 3.3. Novas Colunas Adicionadas
 
-- Na tabela `transacoes`:
-    - Adicionado `descricao` (VARCHAR)
+- Na tabela `produtos`:
+    - Adicionado `categoriaProdutos` (status ENUM)
     - Adicionado `status` (ENUM: 'PENDENTE', 'PAGA', 'ATRASADA')
 
 ---
 
 ### 3.4. Exclusão de Campos
 
-- Tabela `categorias`  
-  *Motivo:* Não é mais utilizado na nova interface.
+- Tabela `funcionarios_lj`, `funcionarios`
+    *Motivo:* As tabela estavam duplicadas
+- Tabela `Inventario`
+    *Motivo:* Essa função não irá ser implementada no sistema no momento
+- Tabela `carrinho`
+    *Motivo:* A tabela continha basicamente os mesmos campos da tabela Vendas, então não fazia sentido.
+- Tabela `retirada`
+   *Motivo:* A tabela faz parte do módulo de pedidos online e esse módulo não será implementado agora
+- Tabela `ItensVenda`
+   *Motivo:* A tabela continha basicamente os mesmos campos da tabela Vendas, então não fazia sentido.
+
+
+
+
+- Tabela `produtos`  
+    - Remoção `imagem_url` (TEXT)
+    *Motivo:* Não será ser aplicado no projeto no momento.
 
 ---
 

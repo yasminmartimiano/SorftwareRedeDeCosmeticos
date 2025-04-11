@@ -1,9 +1,8 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Fornecedor {
@@ -12,19 +11,49 @@ public class Fornecedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "")
     private String cnpj;
-    private String razao_social;
-    private String nome_fantasia;
+    @Column(name = "")
+    private String razaoSocial;
+    @Column(name = "")
+    private String nomeFantasia;
+    @Column(name = "")
     private String endereco;
+    @Column(name = "")
+    private String email;
+    @Column(name = "")
+    private String telefone;
+
+    @OneToMany(mappedBy = "idFornecedor", cascade = CascadeType.ALL)
+    List<EntradaEstoque> estoque;
 
     public Fornecedor() {
     }
 
-    public Fornecedor(String cnpj, String razao_social, String nome_fantasia, String endereco) {
+    public Fornecedor(Long id, String cnpj, String razaoSocial, String nomeFantasia, String endereco, String email, String telefone) {
+        this.id = id;
         this.cnpj = cnpj;
-        this.razao_social = razao_social;
-        this.nome_fantasia = nome_fantasia;
+        this.razaoSocial = razaoSocial;
+        this.nomeFantasia = nomeFantasia;
         this.endereco = endereco;
+        this.email = email;
+        this.telefone = telefone;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Long getId() {
@@ -43,20 +72,20 @@ public class Fornecedor {
         this.cnpj = cnpj;
     }
 
-    public String getRazao_social() {
-        return razao_social;
+    public String getRazaoSocial() {
+        return razaoSocial;
     }
 
-    public void setRazao_social(String razao_social) {
-        this.razao_social = razao_social;
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
     }
 
-    public String getNome_fantasia() {
-        return nome_fantasia;
+    public String getNomeFantasia() {
+        return nomeFantasia;
     }
 
-    public void setNome_fantasia(String nome_fantasia) {
-        this.nome_fantasia = nome_fantasia;
+    public void setNomeFantasia(String nomeFantasia) {
+        this.nomeFantasia = nomeFantasia;
     }
 
     public String getEndereco() {

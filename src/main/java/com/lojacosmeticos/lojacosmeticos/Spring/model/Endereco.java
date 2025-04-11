@@ -8,12 +8,19 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
 
+    @Column(name = "")
     private  String rua;
+    @Column(name = "")
     private String numero;
+    @Column(name = "")
     private String bairro;
+    @Column(name = "")
     private  String cidade;
+    @Column(name = "")
     private String estado;
+    @Column(name = "")
     private String cep;
+
 
     @ManyToOne
     @JoinColumn(name = "cliente")

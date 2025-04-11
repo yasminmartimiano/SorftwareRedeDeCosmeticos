@@ -1,8 +1,6 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.service;
 
-import com.lojacosmeticos.lojacosmeticos.Spring.model.Fornecedor;
 import com.lojacosmeticos.lojacosmeticos.Spring.model.Funcionario;
-import com.lojacosmeticos.lojacosmeticos.Spring.repository.FornecedorRepository;
 import com.lojacosmeticos.lojacosmeticos.Spring.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
