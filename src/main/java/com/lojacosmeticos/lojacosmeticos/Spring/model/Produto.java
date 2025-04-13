@@ -1,79 +1,60 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "produto")
 public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
-    @Column(name = "")
+    private Long id;
+
+    @NotNull
+    @Column(name = "nome_produto", nullable = false)
     private String nomeProduto;
-    @Column(name = "")
-    private String descriacao;
-    @Column(name = "")
+
+    @Column(name = "descricao_produto")
+    private String descricao;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "fornecedor_id", nullable = false)
+    private Fornecedor fornecedor;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "categoria")
     private CategoriaProdutos categoriaProdutos;
-    @Column(name = "")
-    private int quantidadeEstoque;
-    @Column(name = "")
-    private double precoProduto;
 
-    @OneToMany(mappedBy = "idProduto", cascade = CascadeType.ALL)
-    List<EntradaEstoque> entradaEstoque;
+    @NotNull
+    @Column(name = "preco", nullable = false)
+    private Double precoProduto;
 
-    @OneToMany(mappedBy = "idProduto",cascade = CascadeType.ALL)
-    List<SaidaEstoque> saidaEstoque;
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<EntradaEstoque> entradaEstoque = new ArrayList<>();
 
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<SaidaEstoque> saidaEstoque = new ArrayList<>();
 
+    @OneToOne(mappedBy = "produto", cascade = CascadeType.ALL)
+    private Estoque estoque;
 
-    public Produto() {
-    }
-
-
-    public Produto(Long id, String nomeProduto, String descriacao, CategoriaProdutos categoriaProdutos, int quantidadeEstoque, double precoProduto, List<EntradaEstoque> entradaEstoque, List<SaidaEstoque> saidaEstoque) {
+    public Produto(Long id, String nomeProduto, String descricao, Fornecedor fornecedor, CategoriaProdutos categoriaProdutos, Double precoProduto, List<EntradaEstoque> entradaEstoque, List<SaidaEstoque> saidaEstoque, Estoque estoque) {
         this.id = id;
         this.nomeProduto = nomeProduto;
-        this.descriacao = descriacao;
+        this.descricao = descricao;
+        this.fornecedor = fornecedor;
         this.categoriaProdutos = categoriaProdutos;
-        this.quantidadeEstoque = quantidadeEstoque;
         this.precoProduto = precoProduto;
         this.entradaEstoque = entradaEstoque;
         this.saidaEstoque = saidaEstoque;
+        this.estoque = estoque;
     }
 
-    public String getNomeProduto() {
-        return nomeProduto;
-    }
-
-    public void setNomeProduto(String nomeProduto) {
-        this.nomeProduto = nomeProduto;
-    }
-
-    public String getDescriacao() {
-        return descriacao;
-    }
-
-    public void setDescriacao(String descriacao) {
-        this.descriacao = descriacao;
-    }
-
-    public CategoriaProdutos getCategoriaProdutos() {
-        return categoriaProdutos;
-    }
-
-    public void setCategoriaProdutos(CategoriaProdutos categoriaProdutos) {
-        this.categoriaProdutos = categoriaProdutos;
-    }
-
-    public double getPrecoProduto() {
-        return precoProduto;
-    }
-
-    public void setPrecoProduto(double precoProduto) {
-        this.precoProduto = precoProduto;
+    public Produto() {
     }
 
     public Long getId() {
@@ -84,12 +65,44 @@ public class Produto {
         this.id = id;
     }
 
-    public int getQuantidadeEstoque() {
-        return quantidadeEstoque;
+    public String getNomeProduto() {
+        return nomeProduto;
     }
 
-    public void setQuantidadeEstoque(int quantidadeEstoque) {
-        this.quantidadeEstoque = quantidadeEstoque;
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+
+    public CategoriaProdutos getCategoriaProdutos() {
+        return categoriaProdutos;
+    }
+
+    public void setCategoriaProdutos(CategoriaProdutos categoriaProdutos) {
+        this.categoriaProdutos = categoriaProdutos;
+    }
+
+    public Double getPrecoProduto() {
+        return precoProduto;
+    }
+
+    public void setPrecoProduto(Double precoProduto) {
+        this.precoProduto = precoProduto;
     }
 
     public List<EntradaEstoque> getEntradaEstoque() {
@@ -107,4 +120,19 @@ public class Produto {
     public void setSaidaEstoque(List<SaidaEstoque> saidaEstoque) {
         this.saidaEstoque = saidaEstoque;
     }
+
+    public Estoque getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(Estoque estoque) {
+        this.estoque = estoque;
+    }
 }
+
+
+
+
+
+
+

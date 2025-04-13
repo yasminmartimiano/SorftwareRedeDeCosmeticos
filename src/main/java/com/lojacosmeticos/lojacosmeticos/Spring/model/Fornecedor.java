@@ -1,59 +1,58 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.List;
 
+
+@Setter
+@Getter
 @Entity
+@Table(name = "fornecedor")
 public class Fornecedor {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "")
+    @NotNull
+    @Column(name = "cnpj", nullable = false)
     private String cnpj;
-    @Column(name = "")
+
+    @NotNull
+    @Column(name = "razao_social", nullable = false)
     private String razaoSocial;
-    @Column(name = "")
+
+    @NotNull
+    @Column(name = "nome_fantasia", nullable = false)
     private String nomeFantasia;
-    @Column(name = "")
-    private String endereco;
-    @Column(name = "")
+
+
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id", nullable = false)
+    private EnderecoFornecedor enderecoFornecedor;
+
+    @NotNull
+    @Column(name = "email", nullable = false)
     private String email;
-    @Column(name = "")
+
+    @NotNull
+    @Column(name = "telefone", nullable = false)
     private String telefone;
 
-    @OneToMany(mappedBy = "idFornecedor", cascade = CascadeType.ALL)
-    List<EntradaEstoque> estoque;
-
-    public Fornecedor() {
-    }
-
-    public Fornecedor(Long id, String cnpj, String razaoSocial, String nomeFantasia, String endereco, String email, String telefone) {
+    public Fornecedor(Long id, String cnpj, String razaoSocial, String nomeFantasia, EnderecoFornecedor enderecoFornecedor, String email, String telefone) {
         this.id = id;
         this.cnpj = cnpj;
         this.razaoSocial = razaoSocial;
         this.nomeFantasia = nomeFantasia;
-        this.endereco = endereco;
+        this.enderecoFornecedor = enderecoFornecedor;
         this.email = email;
         this.telefone = telefone;
     }
 
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public Fornecedor() {
     }
 
     public Long getId() {
@@ -88,11 +87,30 @@ public class Fornecedor {
         this.nomeFantasia = nomeFantasia;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public EnderecoFornecedor getEnderecoFornecedor() {
+        return enderecoFornecedor;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setEnderecoFornecedor(EnderecoFornecedor enderecoFornecedor) {
+        this.enderecoFornecedor = enderecoFornecedor;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+
 }
+

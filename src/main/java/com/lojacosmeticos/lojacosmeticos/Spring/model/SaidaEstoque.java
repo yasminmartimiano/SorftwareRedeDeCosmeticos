@@ -1,25 +1,107 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table(name = "saida_estoque")
 public class SaidaEstoque {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "")
-    private int idProduto;
-    @Column(name = "")
-    private int quantidade;
-    @Column(name = "")
-    private SimpleDateFormat dataSaida;
-    @Column(name = "")
+    @NotNull
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "produto_id", nullable = false)
+    private Produto produto;
+    @NotNull
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "estoque_id",nullable = false)
+    private Estoque estoque;
+    @NotNull
+    @Column(name = "quantidade",nullable = false)
+    private Integer quantidade;
+    @NotNull
+    @Column(name = "data_saida",nullable = false)
+    private LocalDateTime dataSaida;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "categoria",nullable = true)
     private CategoriaProdutos categoria;
-    @ManyToOne
-    @JoinColumn(name = "")
-    private int id_funcionario;
+    @NotNull
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fornecedor_id", nullable = false)
+    private Fornecedor fornecedor;
 
+    public SaidaEstoque(Long id, Produto produto, Estoque estoque, Integer quantidade, LocalDateTime dataSaida, CategoriaProdutos categoria, Fornecedor fornecedor) {
+        this.id = id;
+        this.produto = produto;
+        this.estoque = estoque;
+        this.quantidade = quantidade;
+        this.dataSaida = dataSaida;
+        this.categoria = categoria;
+        this.fornecedor = fornecedor;
+    }
+
+    public SaidaEstoque() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public Estoque getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(Estoque estoque) {
+        this.estoque = estoque;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public LocalDateTime getDataSaida() {
+        return dataSaida;
+    }
+
+    public void setDataSaida(LocalDateTime dataSaida) {
+        this.dataSaida = dataSaida;
+    }
+
+    public CategoriaProdutos getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(CategoriaProdutos categoria) {
+        this.categoria = categoria;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+    }
 }

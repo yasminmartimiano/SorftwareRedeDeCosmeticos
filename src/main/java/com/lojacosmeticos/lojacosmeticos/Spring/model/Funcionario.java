@@ -1,50 +1,44 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
 import jakarta.persistence.*;
-
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Funcionario extends Cadastro{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
-    @Column(name = "")
+@Table(name = "cadastro_funcionario")
+public class Funcionario extends Cadastro {
+
+    @Column(name = "salario")
     private Double salario;
-    @Column(name = "")
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "cargo")
     private Cargos cargo;
 
-    @OneToMany(mappedBy = "idFuncionario", cascade = CascadeType.ALL)
-    List<SaidaEstoque> saidaEstoque;
-    @OneToMany(mappedBy = "idFuncionario", cascade = CascadeType.ALL)
-    List<Vendas> vendas;
+    @OneToOne
+    @JoinColumn(name = "endereco_id", nullable = false)
+    private EnderecoFuncionario enderecoFuncionario;
 
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
+    private List<Vendas> vendas = new ArrayList<>();
 
-    public Funcionario(String nome, String cpf, String email, String senha, String telefone, Long id, Double salario, Cargos cargo) {
-        super(nome, cpf, email, senha, telefone);
-        this.id = id;
+    public Funcionario() {
+    }
+
+    public Funcionario(Double salario, EnderecoFuncionario enderecoFuncionario, List<Vendas> vendas, Cargos cargo) {
         this.salario = salario;
+        this.enderecoFuncionario = enderecoFuncionario;
+        this.vendas = vendas;
         this.cargo = cargo;
     }
 
-    public Funcionario(String nome, String cpf, String email, String senha, String telefone) {
-        super(nome, cpf, email, senha, telefone);
-    }
-
-    public Cargos getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(Cargos cargo) {
+    public Funcionario(String nome, String cpf, String email, String senha, String telefone, Date dataNascimento, Double salario, EnderecoFuncionario enderecoFuncionario, List<Vendas> vendas, Cargos cargo) {
+        super(nome, cpf, email, senha, telefone, dataNascimento);
+        this.salario = salario;
+        this.enderecoFuncionario = enderecoFuncionario;
+        this.vendas = vendas;
         this.cargo = cargo;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Double getSalario() {
@@ -55,4 +49,28 @@ public class Funcionario extends Cadastro{
         this.salario = salario;
     }
 
+    public List<Vendas> getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(List<Vendas> vendas) {
+        this.vendas = vendas;
+    }
+
+    public EnderecoFuncionario getEnderecoFuncionario() {
+        return enderecoFuncionario;
+    }
+
+    public void setEnderecoFuncionario(EnderecoFuncionario enderecoFuncionario) {
+        this.enderecoFuncionario = enderecoFuncionario;
+    }
+
+    public Cargos getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargos cargo) {
+        this.cargo = cargo;
+    }
 }
+

@@ -1,32 +1,52 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
+@Table(name = "endereco")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Endereco {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    protected Long id;
 
-    @Column(name = "")
-    private  String rua;
-    @Column(name = "")
-    private String numero;
-    @Column(name = "")
-    private String bairro;
-    @Column(name = "")
-    private  String cidade;
-    @Column(name = "")
-    private String estado;
-    @Column(name = "")
-    private String cep;
+    @NotNull
+    @Column(name = "rua", nullable = false)
+    protected String rua;
 
+    @Column(name = "numero")
+    protected String numero;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente")
-    private CadastroCliente cliente;
+    @NotNull
+    @Column(name = "bairro", nullable = false)
+    protected String bairro;
+
+    @NotNull
+    @Column(name = "cidade", nullable = false)
+    protected String cidade;
+
+    @NotNull
+    @Column(name = "estado", nullable = false)
+    protected String estado;
+
+    @NotNull
+    @Column(name = "cep", nullable = false)
+    protected String cep;
+
 
     public Endereco(Long id, String rua, String numero, String bairro, String cidade, String estado, String cep, CadastroCliente cliente) {
+    }
+
+    public Endereco() {
+    }
+
+    public Endereco(Long id, String rua, String numero, String bairro, String cidade, String estado, String cep) {
         this.id = id;
         this.rua = rua;
         this.numero = numero;
@@ -34,7 +54,6 @@ public class Endereco {
         this.cidade = cidade;
         this.estado = estado;
         this.cep = cep;
-        this.cliente = cliente;
     }
 
     public Long getId() {
@@ -91,13 +110,5 @@ public class Endereco {
 
     public void setCep(String cep) {
         this.cep = cep;
-    }
-
-    public CadastroCliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(CadastroCliente cliente) {
-        this.cliente = cliente;
     }
 }

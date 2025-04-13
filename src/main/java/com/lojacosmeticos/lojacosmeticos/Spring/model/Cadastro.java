@@ -1,27 +1,50 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
+
+@Getter
+@Setter
 @Entity
-public class Cadastro {
+@Table(name = "cadastro")
+@Inheritance(strategy = InheritanceType.JOINED)
+public  class Cadastro {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected  Long id;
-    @Column(name = "")
+    protected Long id;
+
+    @NotNull
+    @Column(name = "nome", nullable = false)
     protected String nome;
-    @Column(name = "")
+
+    @NotNull
+    @Column(name = "cpf", nullable = false, unique = true)
     protected String cpf;
-    @Column(name = "")
+
+    @NotNull
+    @Column(name = "email", nullable = false)
     protected String email;
-    @Column(name = "")
+
+    @NotNull
+    @Column(name = "senha", nullable = false)
     protected String senha;
-    @Column(name = "")
+
+    @NotNull
+    @Column(name = "telefone", nullable = false)
     protected String telefone;
-    @Column(name = "")
+
+    @NotNull
+    @Column(name = "data_nascimento", nullable = false)
     protected Date dataNascimento;
 
-    public Cadastro(String nome, String cpf, String email, String senha, String telefone){
+    public Cadastro() {}
+
+    public Cadastro(String nome, String cpf, String email, String senha, String telefone, Date dataNascimento) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
@@ -30,59 +53,4 @@ public class Cadastro {
         this.dataNascimento = dataNascimento;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
 }
