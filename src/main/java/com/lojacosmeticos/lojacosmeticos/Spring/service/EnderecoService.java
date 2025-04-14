@@ -22,9 +22,7 @@ public class EnderecoService {
     }
 
     public Endereco criarEndereco(Endereco endereco) {
-        // Regras de negócio
 
-        // Verificando se algum campo está nulo
         if (endereco.getRua() == null || endereco.getBairro() == null || endereco.getCidade() == null || endereco.getEstado() == null || endereco.getCep() == null) {
             throw new IllegalArgumentException("Nenhum campo pode ser nulo.");
         }
@@ -33,7 +31,6 @@ public class EnderecoService {
     }
 
     public Endereco atualizarEndereco(Long id, Endereco enderecoAtualizado) {
-        // Verifica se o endereço existe
         Optional<Endereco> enderecoExistente = enderecoRepository.findById(id);
         if (!enderecoExistente.isPresent()) {
             throw new IllegalArgumentException("Endereço não encontrado.");

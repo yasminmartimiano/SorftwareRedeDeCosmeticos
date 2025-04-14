@@ -3,10 +3,7 @@ package com.lojacosmeticos.lojacosmeticos.Spring.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "saida_estoque")
@@ -19,7 +16,7 @@ public class SaidaEstoque {
     @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
     @NotNull
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "estoque_id",nullable = false)
     private Estoque estoque;
     @NotNull

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "conta_receber")
 public class ContaReceber {
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -31,23 +31,65 @@ public class ContaReceber {
     @NotNull
     @JoinColumn(name = "pagamento_id", nullable = false)
     private Pagamento pagamentoId;
-    @ManyToOne
+    @OneToOne
     @NotNull
     @JoinColumn(name = "venda_id", nullable = false)
     private Vendas vendas;
-    @ManyToOne
-    @NotNull
-    @JoinColumn(name = "cliente_id", nullable = false)
-    private Funcionario funcionario;
 
-    public ContaReceber(Long id, Double valor, LocalDate dataPagamento, StatusPagamento statusPagamento, Pagamento pagamentoId, Vendas vendas, Funcionario funcionario) {
+    public ContaReceber(Long id, Double valor, LocalDate dataPagamento, StatusPagamento statusPagamento, Pagamento pagamentoId, Vendas vendas) {
         this.id = id;
         this.valor = valor;
         this.dataPagamento = dataPagamento;
         this.statusPagamento = statusPagamento;
         this.pagamentoId = pagamentoId;
         this.vendas = vendas;
-        this.funcionario = funcionario;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public LocalDate getDataPagamento() {
+        return dataPagamento;
+    }
+
+    public void setDataPagamento(LocalDate dataPagamento) {
+        this.dataPagamento = dataPagamento;
+    }
+
+    public StatusPagamento getStatusPagamento() {
+        return statusPagamento;
+    }
+
+    public void setStatusPagamento(StatusPagamento statusPagamento) {
+        this.statusPagamento = statusPagamento;
+    }
+
+    public Pagamento getPagamentoId() {
+        return pagamentoId;
+    }
+
+    public void setPagamentoId(Pagamento pagamentoId) {
+        this.pagamentoId = pagamentoId;
+    }
+
+    public Vendas getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(Vendas vendas) {
+        this.vendas = vendas;
+    }
 }

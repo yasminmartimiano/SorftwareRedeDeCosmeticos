@@ -17,28 +17,24 @@ public class NotaFiscal {
     private String numero;
 
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_emissao", nullable = false)
     private Date dataEmissao;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private CadastroCliente cliente;
 
     @ManyToOne
     @JoinColumn(name = "fornecedor_id")
     private Fornecedor fornecedor;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "venda_id")
     private Vendas venda;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "despesa_id")
     private Despesa despesa;
 
     @NotNull
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "pagamento_id", nullable = false)
     private Pagamento pagamento;
 
@@ -56,11 +52,10 @@ public class NotaFiscal {
     @Column(name = "tipo", nullable = false)
     private TipoNotaFiscal tipo;
 
-    public NotaFiscal(Long id, String numero, Date dataEmissao, CadastroCliente cliente, Fornecedor fornecedor, Vendas venda, Despesa despesa, Pagamento pagamento, Double valorTotal, StatusNotaFiscal status, TipoNotaFiscal tipo) {
+    public NotaFiscal(Long id, String numero, Date dataEmissao, Fornecedor fornecedor, Vendas venda, Despesa despesa, Pagamento pagamento, Double valorTotal, StatusNotaFiscal status, TipoNotaFiscal tipo) {
         this.id = id;
         this.numero = numero;
         this.dataEmissao = dataEmissao;
-        this.cliente = cliente;
         this.fornecedor = fornecedor;
         this.venda = venda;
         this.despesa = despesa;
@@ -68,9 +63,6 @@ public class NotaFiscal {
         this.valorTotal = valorTotal;
         this.status = status;
         this.tipo = tipo;
-    }
-
-    public NotaFiscal() {
     }
 
     public Long getId() {
@@ -95,14 +87,6 @@ public class NotaFiscal {
 
     public void setDataEmissao(Date dataEmissao) {
         this.dataEmissao = dataEmissao;
-    }
-
-    public CadastroCliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(CadastroCliente cliente) {
-        this.cliente = cliente;
     }
 
     public Fornecedor getFornecedor() {

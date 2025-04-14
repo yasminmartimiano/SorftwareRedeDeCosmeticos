@@ -39,10 +39,8 @@ public class Produto {
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private List<SaidaEstoque> saidaEstoque = new ArrayList<>();
 
-    @OneToOne(mappedBy = "produto", cascade = CascadeType.ALL)
-    private Estoque estoque;
 
-    public Produto(Long id, String nomeProduto, String descricao, Fornecedor fornecedor, CategoriaProdutos categoriaProdutos, Double precoProduto, List<EntradaEstoque> entradaEstoque, List<SaidaEstoque> saidaEstoque, Estoque estoque) {
+    public Produto(Long id, String nomeProduto, String descricao, Fornecedor fornecedor, CategoriaProdutos categoriaProdutos, Double precoProduto, List<EntradaEstoque> entradaEstoque, List<SaidaEstoque> saidaEstoque) {
         this.id = id;
         this.nomeProduto = nomeProduto;
         this.descricao = descricao;
@@ -51,10 +49,6 @@ public class Produto {
         this.precoProduto = precoProduto;
         this.entradaEstoque = entradaEstoque;
         this.saidaEstoque = saidaEstoque;
-        this.estoque = estoque;
-    }
-
-    public Produto() {
     }
 
     public Long getId() {
@@ -119,14 +113,6 @@ public class Produto {
 
     public void setSaidaEstoque(List<SaidaEstoque> saidaEstoque) {
         this.saidaEstoque = saidaEstoque;
-    }
-
-    public Estoque getEstoque() {
-        return estoque;
-    }
-
-    public void setEstoque(Estoque estoque) {
-        this.estoque = estoque;
     }
 }
 

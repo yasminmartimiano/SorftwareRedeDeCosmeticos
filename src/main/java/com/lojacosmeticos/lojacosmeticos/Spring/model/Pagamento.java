@@ -25,11 +25,11 @@ public class Pagamento {
     @Column(name = "status_pagamento", nullable = false)
     private StatusPagamento statusPagamento;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "venda_id")
     private Vendas vendas;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "despesa_id")
     private Despesa despesa;
 

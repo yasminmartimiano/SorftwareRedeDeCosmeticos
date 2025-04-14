@@ -14,6 +14,7 @@ public class ContaReceberService {
     private ContaReceberRepository repository;
 
     public ContaReceber salvarConta(ContaReceber conta) {
+
         if (conta.getValor() == null || conta.getValor() <= 0) {
             throw new ContaReceberException("O valor da conta deve ser maior que zero.");
         }
@@ -25,9 +26,6 @@ public class ContaReceberService {
         }
         if (conta.getVendas() == null) {
             throw new ContaReceberException("A venda é obrigatória.");
-        }
-        if (conta.getFuncionario() == null) {
-            throw new ContaReceberException("O cliente é obrigatório.");
         }
         return repository.save(conta);
     }
