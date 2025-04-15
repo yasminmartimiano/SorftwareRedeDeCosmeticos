@@ -13,9 +13,7 @@ import lombok.Setter;
 public class EnderecoFornecedor extends Endereco {
 
 
-    @NotNull
-    @OneToOne
-    @JoinColumn(name = "fornecedor_id", nullable = false)
+    @OneToOne(mappedBy = "enderecoFornecedor")
     private Fornecedor fornecedor;
 
     public EnderecoFornecedor(Fornecedor fornecedor) {
@@ -30,11 +28,5 @@ public class EnderecoFornecedor extends Endereco {
     public EnderecoFornecedor() {
     }
 
-    public Fornecedor getFornecedor() {
-        return fornecedor;
-    }
 
-    public void setFornecedor(Fornecedor fornecedor) {
-        this.fornecedor = fornecedor;
-    }
 }

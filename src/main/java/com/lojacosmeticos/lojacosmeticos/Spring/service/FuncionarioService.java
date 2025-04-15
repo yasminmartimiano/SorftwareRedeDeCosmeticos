@@ -13,17 +13,14 @@ public class FuncionarioService {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
-    // Método para salvar um novo funcionário
     public Funcionario salvar(Funcionario funcionario) {
         return funcionarioRepository.save(funcionario);
     }
 
-    // Método para listar todos os funcionários
     public List<Funcionario> listarTodos() {
         return funcionarioRepository.findAll();
     }
 
-    // Método para buscar um funcionário por ID
     public Funcionario buscarPorId(Long id) {
         Optional<Funcionario> funcionario = funcionarioRepository.findById(id);
         if (funcionario.isPresent()) {
@@ -33,7 +30,6 @@ public class FuncionarioService {
         }
     }
 
-    // Método para atualizar as informações de um funcionário
     public Funcionario atualizar(Long id, Funcionario funcionarioAtualizado) {
         Funcionario funcionarioExistente = buscarPorId(id);
         funcionarioExistente.setNome(funcionarioAtualizado.getNome());
@@ -48,7 +44,6 @@ public class FuncionarioService {
         return funcionarioRepository.save(funcionarioExistente);
     }
 
-    // Método para excluir um funcionário pelo ID
     public void excluir(Long id) {
         funcionarioRepository.deleteById(id);
     }

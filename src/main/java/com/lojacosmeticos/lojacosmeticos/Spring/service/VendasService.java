@@ -31,7 +31,6 @@ public class VendasService {
     public Vendas atualizarVenda(Long id, Vendas novaVenda) {
         Vendas existente = buscarPorId(id);
         existente.setDataVenda(novaVenda.getDataVenda());
-        existente.setCliente(novaVenda.getCliente());
         existente.setFuncionario(novaVenda.getFuncionario());
         existente.setTotal(novaVenda.getTotal());
         return repository.save(existente);

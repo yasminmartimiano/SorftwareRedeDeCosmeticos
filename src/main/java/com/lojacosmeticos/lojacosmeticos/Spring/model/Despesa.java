@@ -33,7 +33,8 @@ public class Despesa {
     @Column(name = "pagamento_id", nullable = false)
     private Pagamento pagamentoId;
 
-    @Column(name = "fornecedor_id")
+    @ManyToOne
+    @JoinColumn(name = "fornecedor_id")
     private Fornecedor fornecedor;
 
     @Column(name = "funcionario_id")
@@ -50,59 +51,5 @@ public class Despesa {
         this.funcionario = funcionario;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Double getValor() {
-        return valor;
-    }
-
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
-
-    public Date getDataPagamento() {
-        return dataPagamento;
-    }
-
-    public void setDataPagamento(Date dataPagamento) {
-        this.dataPagamento = dataPagamento;
-    }
-
-    public StatusPagamento getStatusPagamento() {
-        return statusPagamento;
-    }
-
-    public void setStatusPagamento(StatusPagamento statusPagamento) {
-        this.statusPagamento = statusPagamento;
-    }
-
-    public Pagamento getPagamentoId() {
-        return pagamentoId;
-    }
-
-    public void setPagamentoId(Pagamento pagamentoId) {
-        this.pagamentoId = pagamentoId;
-    }
-
-    public Fornecedor getFornecedor() {
-        return fornecedor;
-    }
-
-    public void setFornecedor(Fornecedor fornecedor) {
-        this.fornecedor = fornecedor;
-    }
-
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
-    }
 }
