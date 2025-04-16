@@ -6,10 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-@Entity
-@Table(name = "endereco")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Endereco {
+
+@MappedSuperclass
+public abstract class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

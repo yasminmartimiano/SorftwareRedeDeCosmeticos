@@ -2,10 +2,8 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.NotNull;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 

@@ -1,5 +1,6 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -49,6 +50,7 @@ public class Funcionario {
 
     @OneToOne
     @JoinColumn(name = "endereco_id", nullable = false)
+    @JsonManagedReference
     private EnderecoFuncionario enderecoFuncionario;
 
     @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)

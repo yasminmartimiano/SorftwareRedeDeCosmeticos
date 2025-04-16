@@ -3,6 +3,8 @@ package com.lojacosmeticos.lojacosmeticos.Spring.service;
 import com.lojacosmeticos.lojacosmeticos.Spring.model.Funcionario;
 import com.lojacosmeticos.lojacosmeticos.Spring.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,8 +14,17 @@ import java.util.Optional;
 public class FuncionarioService {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public FuncionarioService(FuncionarioRepository funcionarioRepository, PasswordEncoder passwordEncoder) {
+        this.funcionarioRepository = funcionarioRepository;
+        this.passwordEncoder = new BCryptPasswordEncoder();
+    }
 
     public Funcionario salvar(Funcionario funcionario) {
+        String encoder = this.passwordEncoder.encode(funcionario.getSenha());
+        funcionario.setSenha(encoder);
         return funcionarioRepository.save(funcionario);
     }
 
