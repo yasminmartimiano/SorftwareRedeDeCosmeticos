@@ -8,8 +8,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-@Setter
-@Getter
+
 @Entity
 @Table(name = "agendamento")
 public class Agendamento {
@@ -43,5 +42,43 @@ public class Agendamento {
         this.statusAgendamento = statusAgendamento;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(LocalDateTime dataHora) {
+        this.dataHora = dataHora;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public Servicos getServico() {
+        return servico;
+    }
+
+    public void setServico(Servicos servico) {
+        this.servico = servico;
+    }
+
+    public StatusAgendamento getStatusAgendamento() {
+        return statusAgendamento;
+    }
+
+    public void setStatusAgendamento(StatusAgendamento statusAgendamento) {
+        this.statusAgendamento = statusAgendamento;
+    }
 }

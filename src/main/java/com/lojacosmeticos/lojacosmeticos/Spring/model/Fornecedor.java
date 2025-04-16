@@ -6,9 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-
-@Setter
-@Getter
 @Entity
 @Table(name = "fornecedor")
 public class Fornecedor {
@@ -30,7 +27,7 @@ public class Fornecedor {
 
 
     @NotNull
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "endereco_id", nullable = false)
     private EnderecoFornecedor enderecoFornecedor;
 
@@ -110,7 +107,5 @@ public class Fornecedor {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
-
 }
 

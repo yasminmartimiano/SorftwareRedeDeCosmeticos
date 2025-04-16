@@ -1,7 +1,11 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "servico")
 public class Servicos {
@@ -29,20 +33,12 @@ public class Servicos {
     public Servicos() {
     }
 
-    public Long getId() {
-        return id;
+    public String getDuracaoEstimada() {
+        return duracaoEstimada;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNomeServico() {
-        return nomeServico;
-    }
-
-    public void setNomeServico(String nomeServico) {
-        this.nomeServico = nomeServico;
+    public void setDuracaoEstimada(String duracaoEstimada) {
+        this.duracaoEstimada = duracaoEstimada;
     }
 
     public Double getPrecoServico() {
@@ -53,12 +49,20 @@ public class Servicos {
         this.precoServico = precoServico;
     }
 
-    public String getDuracaoEstimada() {
-        return duracaoEstimada;
+    public String getNomeServico() {
+        return nomeServico;
     }
 
-    public void setDuracaoEstimada(String duracaoEstimada) {
-        this.duracaoEstimada = duracaoEstimada;
+    public void setNomeServico(String nomeServico) {
+        this.nomeServico = nomeServico;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
 

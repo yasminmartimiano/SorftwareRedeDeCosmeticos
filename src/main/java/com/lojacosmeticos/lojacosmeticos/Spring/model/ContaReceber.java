@@ -45,5 +45,51 @@ public class ContaReceber {
         this.vendas = vendas;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public LocalDate getDataPagamento() {
+        return dataPagamento;
+    }
+
+    public void setDataPagamento(LocalDate dataPagamento) {
+        this.dataPagamento = dataPagamento;
+    }
+
+    public StatusPagamento getStatusPagamento() {
+        return statusPagamento;
+    }
+
+    public void setStatusPagamento(StatusPagamento statusPagamento) {
+        this.statusPagamento = statusPagamento;
+    }
+
+    public Pagamento getPagamentoId() {
+        return pagamentoId;
+    }
+
+    public void setPagamentoId(Pagamento pagamentoId) {
+        this.pagamentoId = pagamentoId;
+    }
+
+    public Vendas getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(Vendas vendas) {
+        this.vendas = vendas;
+    }
 }

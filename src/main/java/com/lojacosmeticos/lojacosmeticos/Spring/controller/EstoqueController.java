@@ -1,12 +1,10 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.controller;
 
 import com.lojacosmeticos.lojacosmeticos.Spring.model.Estoque;
-import com.lojacosmeticos.lojacosmeticos.Spring.repository.EstoqueRepository;
 import com.lojacosmeticos.lojacosmeticos.Spring.service.EstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

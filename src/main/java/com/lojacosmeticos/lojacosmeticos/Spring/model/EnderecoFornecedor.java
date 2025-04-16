@@ -6,8 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-@Setter
-@Getter
+
 @Entity
 @Table(name = "endereco_fornecedor")
 public class EnderecoFornecedor extends Endereco {
@@ -28,5 +27,11 @@ public class EnderecoFornecedor extends Endereco {
     public EnderecoFornecedor() {
     }
 
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
 
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+    }
 }

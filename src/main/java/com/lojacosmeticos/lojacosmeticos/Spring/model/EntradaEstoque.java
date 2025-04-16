@@ -6,8 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-@Getter
-@Setter
+
 @Entity
 @Table(name = "entrada_estoque")
 public class EntradaEstoque {
@@ -55,7 +54,61 @@ public class EntradaEstoque {
         this.fornecedor = fornecedor;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public Estoque getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(Estoque estoque) {
+        this.estoque = estoque;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public LocalDateTime getDataEntrada() {
+        return dataEntrada;
+    }
+
+    public void setDataEntrada(LocalDateTime dataEntrada) {
+        this.dataEntrada = dataEntrada;
+    }
+
+    public CategoriaProdutos getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(CategoriaProdutos categoria) {
+        this.categoria = categoria;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+    }
 }
 
 

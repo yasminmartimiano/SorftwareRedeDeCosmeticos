@@ -7,8 +7,7 @@ import lombok.Setter;
 
 import java.util.Date;
 
-@Setter
-@Getter
+
 @Entity
 @Table(name = "despesa")
 public class Despesa {
@@ -29,15 +28,17 @@ public class Despesa {
     @Column(name = "status_pagamento", nullable = true)
     private StatusPagamento statusPagamento;
 
+    @OneToOne
     @NotNull
-    @Column(name = "pagamento_id", nullable = false)
+    @JoinColumn(name = "pagamento_id", nullable = false)
     private Pagamento pagamentoId;
 
     @ManyToOne
     @JoinColumn(name = "fornecedor_id")
     private Fornecedor fornecedor;
 
-    @Column(name = "funcionario_id")
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
 
 
@@ -51,5 +52,59 @@ public class Despesa {
         this.funcionario = funcionario;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public Date getDataPagamento() {
+        return dataPagamento;
+    }
+
+    public void setDataPagamento(Date dataPagamento) {
+        this.dataPagamento = dataPagamento;
+    }
+
+    public StatusPagamento getStatusPagamento() {
+        return statusPagamento;
+    }
+
+    public void setStatusPagamento(StatusPagamento statusPagamento) {
+        this.statusPagamento = statusPagamento;
+    }
+
+    public Pagamento getPagamentoId() {
+        return pagamentoId;
+    }
+
+    public void setPagamentoId(Pagamento pagamentoId) {
+        this.pagamentoId = pagamentoId;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
 }

@@ -5,8 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+
 @Entity
 @Table(name = "endereco_funcionario")
 public class EnderecoFuncionario extends Endereco {
@@ -22,6 +21,12 @@ public class EnderecoFuncionario extends Endereco {
         this.funcionario = funcionario;
     }
 
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
 
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
 }
 

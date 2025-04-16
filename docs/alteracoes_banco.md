@@ -20,7 +20,7 @@ Este documento tem como finalidade registrar todas as modificações realizadas 
     - `Produtos`
     - `Fornecedores`
     - `Entrada`
-    - `Saia`
+    - `Saida`
     - `Funcionarios`
     - `Inventario`
     - `notas_fiscais`
@@ -71,9 +71,35 @@ Este documento tem como finalidade registrar todas as modificações realizadas 
 ### 3.2. Novas Tabelas Criadas
 
 - `estoque`  
-  Campos: `id`, `numero_cartao`, `bandeira`, `limite`, `cliente_id`  
-  *Motivo:* Gerenciar os cartões de crédito dos clientes vinculados ao sistema.
-
+  Campos: `id`, `produto_id`, `descricao_produto`, `fornecedor_id`, `categoria` , `preco`
+  *Motivo:* Mudança do direção do projeto para focar exclusivamente na parte interna da empresa
+- `conta_receber`
+  Campos: `id`, `valor`, `data_pagamento`, `status_recebimento`, `pagamento_id` , `venda_id`
+  *Motivo:* Aprofundamento no módulo de finanças
+- `despesa`
+  Campos: `id`, `valor`, `data_pagamento`, `status_pagamento`, `pagamento_id` , `fornecedor_id`, `funcionario_id`
+  *Motivo:* Aprofundamento no módulo de finanças
+-  `entrada_estoque`
+   Campos: `id`, `produto_id`, `estoque_id`, `quantidade`, `data_entrada` , `categoria`, `foenecedor_id`
+   *Motivo:* Mudança do direção do projeto para focar exclusivamente na parte interna da empresa
+- `saida_estoque`
+  Campos: `id`, `produto_id`, `estoque_id`, `quantidade`, `data_entrada` , `categoria`, `foenecedor_id`
+  *Motivo:* Mudança do direção do projeto para focar exclusivamente na parte interna da empresa
+- `endereco`
+  Campos: `id`, `rua`, `numero`, `bairro`, `cidade` , `estado`, `cep`
+  *Motivo:* Usar uma classe pai para separar o endereço dos funcionários e fornecedores
+- `endereco_funcionario`
+  Campos: `id`, `rua`, `numero`, `bairro`, `cidade` , `estado`, `cep`, `funcionario_id`
+  *Motivo:* Usar uma classe pai para separar o endereço dos funcionários e fornecedores
+- `endereco_fornecedor`
+  Campos: `id`, `rua`, `numero`, `bairro`, `cidade` , `estado`, `cep`, `fornecedor_id`
+  *Motivo:* Usar uma classe pai para separar o endereço dos funcionários e fornecedores
+- `cadastro`
+  Campos: `id`, `nome`, `cpf`, `email`, `senha` , `telefone`, `data_nascimento`
+  *Motivo:* Usar uma classe pai para separar o endereço dos funcionários e fornecedores
+- `cadastro`
+  Campos: `id`, `nome`, `cpf`, `email`, `senha` , `telefone`, `data_nascimento`
+  *Motivo:* Usar uma classe pai para separar o endereço dos funcionários e fornecedores
 ---
 
 ### 3.3. Novas Colunas Adicionadas
@@ -96,6 +122,7 @@ Este documento tem como finalidade registrar todas as modificações realizadas 
    *Motivo:* A tabela faz parte do módulo de pedidos online e esse módulo não será implementado agora
 - Tabela `ItensVenda`
    *Motivo:* A tabela continha basicamente os mesmos campos da tabela Vendas, então não fazia sentido.
+- 
 
 
 

@@ -1,8 +1,12 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
 import jakarta.persistence.*;
-import java.util.Date;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.Date;
+@Getter
+@Setter
 @Entity
 @Table(name = "venda")
 public class Vendas {
