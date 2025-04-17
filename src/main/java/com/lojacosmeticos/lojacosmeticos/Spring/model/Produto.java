@@ -55,6 +55,9 @@ public class Produto {
         this.saidaEstoque = saidaEstoque;
     }
 
+    public Produto() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -118,6 +121,12 @@ public class Produto {
     public void setSaidaEstoque(List<SaidaEstoque> saidaEstoque) {
         this.saidaEstoque = saidaEstoque;
     }
+    public int calcularEstoque(Produto produto) {
+        int entradas = produto.getEntradaEstoque().stream().mapToInt(EntradaEstoque::getQuantidade).sum();
+        int saidas = produto.getSaidaEstoque().stream().mapToInt(SaidaEstoque::getQuantidade).sum();
+        return entradas - saidas;
+    }
+
 }
 
 

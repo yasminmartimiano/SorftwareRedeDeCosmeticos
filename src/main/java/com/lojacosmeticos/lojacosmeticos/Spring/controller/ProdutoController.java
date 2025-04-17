@@ -1,6 +1,9 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.controller;
 
+import com.lojacosmeticos.lojacosmeticos.Spring.dto.ProdutoDTO;
+import com.lojacosmeticos.lojacosmeticos.Spring.model.EntradaEstoque;
 import com.lojacosmeticos.lojacosmeticos.Spring.model.Produto;
+import com.lojacosmeticos.lojacosmeticos.Spring.model.SaidaEstoque;
 import com.lojacosmeticos.lojacosmeticos.Spring.repository.ProdutoRepository;
 import com.lojacosmeticos.lojacosmeticos.Spring.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +24,23 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Produto>> listarTodos() {
-        return ResponseEntity.ok(produtoService.listarTodos());
+    public ResponseEntity<List<ProdutoDTO>> listarTodos() {
+        List<Produto> produtos = produtoService.listarTodos();
+        List<ProdutoDTO> dtos = produtos.stream().map(produto -> {
+            int entradas = produto.getEntradaEstoque().stream().mapToInt(EntradaEstoque::getQuantidade).sum();
+            int saidas = produto.getSaidaEstoque().stream().mapToInt(SaidaEstoque::getQuantidade).sum();
+            ProdutoDTO dto = new ProdutoDTO();
+            dto.setId(produto.getId());
+            dto.setNomeProduto(produto.getNomeProduto());
+            dto.setDescricao(produto.getDescricao());
+            dto.setPrecoProduto(produto.getPrecoProduto());
+            dto.setQuantidadeEstoque(entradas - saidas);
+            return dto;
+        }).toList();
+
+        return ResponseEntity.ok(dtos);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Produto> buscarPorId(@PathVariable Long id) {

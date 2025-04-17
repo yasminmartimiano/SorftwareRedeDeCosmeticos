@@ -1,5 +1,6 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -25,10 +26,8 @@ public class Fornecedor {
     @Column(name = "nome_fantasia", nullable = false)
     private String nomeFantasia;
 
-
-    @NotNull
-    @OneToOne
-    @JoinColumn(name = "endereco_id", nullable = false)
+    @JsonManagedReference
+    @OneToOne(mappedBy = "fornecedor")
     private EnderecoFornecedor enderecoFornecedor;
 
     @NotNull

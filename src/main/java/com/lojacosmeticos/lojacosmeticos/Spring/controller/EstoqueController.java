@@ -1,6 +1,9 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.controller;
 
+import com.lojacosmeticos.lojacosmeticos.Spring.dto.EstoqueDTO;
+import com.lojacosmeticos.lojacosmeticos.Spring.dto.ProdutoDTO;
 import com.lojacosmeticos.lojacosmeticos.Spring.model.Estoque;
+import com.lojacosmeticos.lojacosmeticos.Spring.repository.EstoqueRepository;
 import com.lojacosmeticos.lojacosmeticos.Spring.service.EstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/estoque")
@@ -15,6 +19,8 @@ public class EstoqueController {
 
     @Autowired
     private EstoqueService estoqueService;
+
+    private EstoqueRepository estoqueRepository;
 
     @PostMapping
     public ResponseEntity<Estoque> criarEstoque(@RequestBody Estoque estoque) {
@@ -36,10 +42,17 @@ public class EstoqueController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<List<Estoque>> listarTodos() {
-        List<Estoque> lista = estoqueService.listarTodos();
-        return new ResponseEntity<>(lista, HttpStatus.OK);
+    @GetMapping("/estoque")
+    public List<EstoqueDTO> listarEstoque() {
+        List<Estoque> estoques = estoqueRepository.findAll();
+
+        return estoques.stream().map(estoque -> new EstoqueDTO(
+                estoque.getId(),
+                new ProdutoDTO(estoque.getProduto().getId(), estoque.getProduto().getNomeProduto(),
+                        estoque.getProduto().getDescricao(), estoque.getProduto().getPrecoProduto()),
+                estoque.getCategoriaProduto().name(),
+                estoque.getQuantidadeAtual()
+        )).collect(Collectors.toList());
     }
 
     @PutMapping("/{id}")

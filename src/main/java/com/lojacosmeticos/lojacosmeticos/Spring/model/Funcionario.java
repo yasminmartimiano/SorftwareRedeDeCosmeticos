@@ -1,5 +1,6 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -37,8 +38,8 @@ public class Funcionario {
     @Column(name = "telefone", nullable = false)
     private String telefone;
 
-    @NotNull
-    @Column(name = "data_nascimento", nullable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    @Column(name = "data_nascimento")
     private Date dataNascimento;
 
     @Column(name = "salario")
@@ -48,8 +49,7 @@ public class Funcionario {
     @Column(name = "cargo")
     private Cargos cargo;
 
-    @OneToOne
-    @JoinColumn(name = "endereco_id", nullable = false)
+    @OneToOne(mappedBy = "funcionario", cascade = CascadeType.ALL)
     @JsonManagedReference
     private EnderecoFuncionario enderecoFuncionario;
 

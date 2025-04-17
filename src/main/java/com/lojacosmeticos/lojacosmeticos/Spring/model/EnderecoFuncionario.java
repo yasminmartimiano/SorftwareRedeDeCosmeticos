@@ -11,7 +11,8 @@ import lombok.Setter;
 @Table(name = "endereco_funcionario")
 public class EnderecoFuncionario extends Endereco {
     @JsonBackReference
-    @OneToOne(mappedBy = "enderecoFuncionario")
+    @OneToOne
+    @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
 
     public EnderecoFuncionario(Funcionario funcionario) {

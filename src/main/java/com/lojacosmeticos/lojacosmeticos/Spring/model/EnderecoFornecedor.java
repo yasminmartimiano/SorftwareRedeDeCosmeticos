@@ -1,5 +1,6 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -11,8 +12,9 @@ import lombok.Setter;
 @Table(name = "endereco_fornecedor")
 public class EnderecoFornecedor extends Endereco {
 
-
-    @OneToOne(mappedBy = "enderecoFornecedor")
+    @JsonBackReference
+    @OneToOne
+    @JoinColumn(name = "fornecedor_id")
     private Fornecedor fornecedor;
 
     public EnderecoFornecedor(Fornecedor fornecedor) {

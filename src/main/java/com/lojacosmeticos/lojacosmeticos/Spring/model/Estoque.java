@@ -1,5 +1,6 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -17,6 +18,8 @@ public class Estoque {
     @NotNull
     @OneToOne
     @JoinColumn(name = "produto_id", nullable = false)
+    @JsonIgnore
+
     private Produto produto;
 
     @NotNull
