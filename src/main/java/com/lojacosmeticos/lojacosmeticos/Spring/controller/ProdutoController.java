@@ -1,14 +1,9 @@
 package com.lojacosmeticos.lojacosmeticos.Spring.controller;
 
-import com.lojacosmeticos.lojacosmeticos.Spring.dto.ProdutoDTO;
-import com.lojacosmeticos.lojacosmeticos.Spring.model.EntradaEstoque;
 import com.lojacosmeticos.lojacosmeticos.Spring.model.Produto;
-import com.lojacosmeticos.lojacosmeticos.Spring.model.SaidaEstoque;
 import com.lojacosmeticos.lojacosmeticos.Spring.repository.ProdutoRepository;
 import com.lojacosmeticos.lojacosmeticos.Spring.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,50 +12,42 @@ import java.util.List;
 @RequestMapping("/produto")
 public class ProdutoController {
 
-    private final ProdutoService produtoService;
+    @Autowired
+    private ProdutoRepository produtoRepository;
 
-    public ProdutoController(ProdutoService produtoService) {
-        this.produtoService = produtoService;
+    @PostMapping
+    public Produto criarProduto(@RequestBody Produto produto) {
+        return produtoRepository.save(produto);
     }
 
     @GetMapping
-    public ResponseEntity<List<ProdutoDTO>> listarTodos() {
-        List<Produto> produtos = produtoService.listarTodos();
-        List<ProdutoDTO> dtos = produtos.stream().map(produto -> {
-            int entradas = produto.getEntradaEstoque().stream().mapToInt(EntradaEstoque::getQuantidade).sum();
-            int saidas = produto.getSaidaEstoque().stream().mapToInt(SaidaEstoque::getQuantidade).sum();
-            ProdutoDTO dto = new ProdutoDTO();
-            dto.setId(produto.getId());
-            dto.setNomeProduto(produto.getNomeProduto());
-            dto.setDescricao(produto.getDescricao());
-            dto.setPrecoProduto(produto.getPrecoProduto());
-            dto.setQuantidadeEstoque(entradas - saidas);
-            return dto;
-        }).toList();
-
-        return ResponseEntity.ok(dtos);
+    public List<Produto> listarProdutos() {
+        return produtoRepository.findAll();
     }
-
 
     @GetMapping("/{id}")
-    public ResponseEntity<Produto> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(produtoService.buscarPorId(id));
-    }
-
-    @PostMapping
-    public ResponseEntity<Produto> salvar(@RequestBody Produto produto) {
-        return new ResponseEntity<>(produtoService.salvar(produto), HttpStatus.CREATED);
+    public Produto buscarProduto(@PathVariable Long id) {
+        return produtoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody Produto produto) {
-        return ResponseEntity.ok(produtoService.atualizar(id, produto));
+    public Produto atualizarProduto(@PathVariable Long id, @RequestBody Produto produtoAtualizado) {
+        Produto produto = produtoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
+
+        produto.setNomeProduto(produtoAtualizado.getNomeProduto());
+        produto.setDescricao(produtoAtualizado.getDescricao());
+        produto.setPrecoProduto(produtoAtualizado.getPrecoProduto());
+        return produtoRepository.save(produto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        produtoService.deletar(id);
-        return ResponseEntity.noContent().build();
+    public String deletarProduto(@PathVariable Long id) {
+        Produto produto = produtoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
+        produtoRepository.delete(produto);
+        return "Produto deletado com sucesso!";
     }
 
 }

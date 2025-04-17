@@ -55,6 +55,7 @@ public class Produto {
         this.saidaEstoque = saidaEstoque;
     }
 
+
     public Produto() {
     }
 
